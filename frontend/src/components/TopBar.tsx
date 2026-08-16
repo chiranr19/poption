@@ -1,4 +1,5 @@
 import type { ChainSnapshot, Regime } from "@/lib/types";
+import { GuaranteesRibbon } from "@/components/learn/GuaranteesRibbon";
 
 const REGIME_LABEL: Record<Regime, { label: string; tone: string }> = {
   calm: { label: "Calm", tone: "text-sage border-sage/40 bg-sage/10" },
@@ -15,9 +16,11 @@ const STATUS_LABEL: Record<"connecting" | "open" | "closed", { text: string; dot
 export function TopBar({
   snapshot,
   status,
+  openWatching = 0,
 }: {
   snapshot: ChainSnapshot | null;
   status: "connecting" | "open" | "closed";
+  openWatching?: number;
 }) {
   const regime = snapshot ? REGIME_LABEL[snapshot.regime] : REGIME_LABEL.normal;
   const s = STATUS_LABEL[status];
@@ -36,8 +39,17 @@ export function TopBar({
             </span>
           </div>
           <p className="mt-1 font-display text-sm italic text-muted">
-            Every anomaly explained. Every claim grounded.
+            Options-flow forensics · learn the market by watching it
           </p>
+          <div className="mt-2 flex items-center gap-4">
+            <GuaranteesRibbon />
+            {openWatching > 0 && (
+              <span className="text-[10px] uppercase tracking-[0.18em] text-copper">
+                <span className="mr-1.5 inline-block h-1 w-1 rounded-full bg-copper" />
+                Watching {openWatching} trade{openWatching === 1 ? "" : "s"}
+              </span>
+            )}
+          </div>
         </div>
 
         {/* Live readout */}

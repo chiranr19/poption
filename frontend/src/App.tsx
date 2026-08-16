@@ -2,12 +2,15 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { connectStream, getForensics, getScenarios, startReplay, stopReplay } from "@/lib/api";
 import type { Anomaly, ChainSnapshot, ForensicsResponse, Scenario, WsFrame } from "@/lib/types";
+import { loadCards, type StudyCard } from "@/lib/studycards";
 import { TopBar } from "@/components/TopBar";
 import { PriceChart } from "@/components/PriceChart";
 import { IVHeatmap } from "@/components/IVHeatmap";
 import { AnomalyFeed } from "@/components/AnomalyFeed";
-import { ForensicsPanel } from "@/components/ForensicsPanel";
+import { LearningDrawer } from "@/components/LearningDrawer";
 import { ScenarioBar } from "@/components/ScenarioBar";
+import { StartHere } from "@/components/learn/StartHere";
+import { PnLMechanics } from "@/components/learn/PnLMechanics";
 
 const ANOMALY_HISTORY_MAX = 40;
 
@@ -20,10 +23,12 @@ export default function App() {
   const [forensics, setForensics] = useState<ForensicsResponse | null>(null);
   const [scenarios, setScenarios] = useState<Scenario[]>([]);
   const [activeScenario, setActiveScenario] = useState<string | null>(null);
+  const [studyCards, setStudyCards] = useState<StudyCard[]>([]);
   const anomalyIds = useRef<Set<string>>(new Set());
 
-  // Bootstrap: scenarios + WebSocket.
+  // Bootstrap: scenarios + WebSocket + persisted study cards.
   useEffect(() => {
+    setStudyCards(loadCards());
     getScenarios().then(setScenarios).catch(() => {});
     const close = connectStream(
       (frame: WsFrame) => {
@@ -39,7 +44,6 @@ export default function App() {
             const combined = [...fresh, ...prev].slice(0, ANOMALY_HISTORY_MAX);
             return combined;
           });
-          // Auto-select the newest fire so the forensics panel is always current.
           setSelected(frame.anomalies[0]);
         }
       },
@@ -68,6 +72,10 @@ export default function App() {
     () => scenarios.find((s) => s.key === activeScenario)?.title ?? null,
     [activeScenario, scenarios],
   );
+  const openWatchingCount = useMemo(
+    () => studyCards.filter((c) => c.status === "open").length,
+    [studyCards],
+  );
 
   const handleStartScenario = async (key: string) => {
     setAnomalies([]);
@@ -81,9 +89,15 @@ export default function App() {
     setActiveScenario(null);
   };
 
+  // The drawer stays available whenever there's a selection OR there are
+  // study cards to review — so the user can check on their tagged trades
+  // anytime, not only right after a fire.
+  const drawerOpen = selected != null || studyCards.length > 0;
+
   return (
     <div className="mx-auto flex min-h-screen max-w-[1600px] flex-col">
-      <TopBar snapshot={snapshot} status={status} />
+      <TopBar snapshot={snapshot} status={status} openWatching={openWatchingCount} />
+      <StartHere />
       <ScenarioBar
         scenarios={scenarios}
         active={activeScenario}
@@ -92,11 +106,12 @@ export default function App() {
         onStop={handleStopScenario}
       />
 
-      {/* Main grid — left column: candles + heatmap; right column: anomaly feed */}
+      {/* Main grid */}
       <div className="grid flex-1 grid-cols-1 gap-4 px-4 py-4 lg:grid-cols-[minmax(0,1fr)_360px] lg:px-6 xl:grid-cols-[minmax(0,1fr)_400px]">
         <div className="flex min-w-0 flex-col gap-4">
           <PriceChart history={priceHistory} snapshot={snapshot} />
           <IVHeatmap snapshot={snapshot} />
+          <PnLMechanics />
         </div>
         <AnomalyFeed
           anomalies={anomalies}
@@ -105,20 +120,24 @@ export default function App() {
         />
       </div>
 
-      {/* Forensics drawer at the bottom — mounts/unmounts with the selection */}
+      {/* Learning drawer: tabs for how-to-read, playbook, persona trades,
+          forensics, plus a persistent Watching tab that stays open even
+          when no anomaly is selected. */}
       <AnimatePresence>
-        {selected && (
+        {drawerOpen && (
           <motion.div
-            key={selected.id}
             initial={{ y: 40, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: 40, opacity: 0 }}
             transition={{ type: "spring", stiffness: 260, damping: 28 }}
-            className="border-t border-hair bg-panel/95 px-4 py-4 backdrop-blur-md lg:px-6"
+            className="border-t border-hair bg-panel/95 backdrop-blur-md"
           >
-            <ForensicsPanel
+            <LearningDrawer
               anomaly={selected}
+              snapshot={snapshot}
               forensics={forensics}
+              studyCards={studyCards}
+              onStudyCardsChange={setStudyCards}
               onClose={() => setSelected(null)}
             />
           </motion.div>

@@ -26,6 +26,7 @@ from .models import ChainSnapshot
 from .services.broker import SimulationClock
 from .services.detector import DetectorState, evaluate
 from .services.forensics import stream_forensics, render_stub, grounding_report
+from .services import personas as personas_service
 from .services.replay import get_scenario, list_scenarios
 from .services.retriever import Retriever
 from .services.simulator import MarketSimulator, Regime
@@ -238,6 +239,19 @@ def _apply_replay_step_if_any() -> None:
 # --------------------------------------------------------------------------- #
 # Retrieval — "what historical events look like this anomaly?"
 # --------------------------------------------------------------------------- #
+@app.get("/personas/{anomaly_id}", tags=["learn"])
+def personas(anomaly_id: str) -> dict:
+    """Persona trades for the anomaly — what market makers, directional
+    traders, and vol traders typically put on in response to this kind."""
+    anomaly = next((a for a in _recent_anomalies if a.id == anomaly_id), None)
+    if anomaly is None:
+        raise HTTPException(404, f"anomaly '{anomaly_id}' not in recent buffer")
+    bundle = personas_service.persona_bundle(anomaly.kind)
+    if bundle is None:
+        raise HTTPException(500, f"no persona corpus for kind '{anomaly.kind}'")
+    return bundle
+
+
 @app.get("/analogues/{anomaly_id}", tags=["data"])
 def analogues(anomaly_id: str, top_k: int = 3) -> dict:
     anomaly = next((a for a in _recent_anomalies if a.id == anomaly_id), None)

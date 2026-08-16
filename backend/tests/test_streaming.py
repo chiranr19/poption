@@ -80,6 +80,11 @@ def test_anomalies_endpoint_returns_a_list(client):
     assert isinstance(r.json()["anomalies"], list)
 
 
+def test_personas_endpoint_404s_on_unknown_id(client):
+    r = client.get("/personas/does_not_exist")
+    assert r.status_code == 404
+
+
 def test_pause_and_resume_control(client):
     client.post("/control/pause")
     client.post("/control/resume")

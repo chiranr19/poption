@@ -1,0 +1,100 @@
+{
+  "meta": {
+    "version": 1,
+    "note": "Concrete opinionated trade structures a specific desk archetype would typically put on in response to each anomaly kind. Third-person portrayals of professional behavior — descriptions of what pros typically do, not recommendations to the reader. Every entry is scanned by tests/test_personas.py against the same FORBIDDEN advice-language regex used elsewhere in the codebase."
+  },
+  "personas": {
+    "market_maker": {
+      "title": "Market Maker",
+      "philosophy": "Provides two-sided liquidity for a spread; profits on the bid-ask edge; wants to be flat on direction and short on vol premium. Reacts to flow rather than betting on outcomes."
+    },
+    "directional_trader": {
+      "title": "Directional Trader",
+      "philosophy": "Expresses a view on where the underlying goes next. Uses options for defined-risk leverage rather than betting the whole underlying. Cares primarily about delta and secondarily about IV."
+    },
+    "vol_trader": {
+      "title": "Vol Trader",
+      "philosophy": "Trades the volatility itself — sells rich vol, buys cheap vol, hedges delta out. Cares primarily about vega, secondarily about gamma and theta."
+    }
+  },
+  "trades": {
+    "iv_spike": {
+      "market_maker": {
+        "view": "flow-reactive; typically leans slightly short vega if the spike looks like fear-driven demand for puts",
+        "structure": "widens quoted spreads on both sides; delta-hedges every fill; often lays off inventory into the flow by selling into the demand",
+        "example_position": "short 30-DTE ATM straddle at 1x, delta-hedged with the underlying, held only until inventory clears",
+        "max_risk": "gap risk if the underlying moves violently before the delta-hedge can rebalance; gamma losses if realized vol exceeds the sold vol",
+        "typical_horizon": "hours to a session",
+        "rationale": "the desk is paid to warehouse risk, not to predict; a spike in demand is a chance to charge more for the same warehousing"
+      },
+      "directional_trader": {
+        "view": "views the IV spike as a signal that something is priced into the tape — takes a directional read from what's moving underneath (spot direction + P/C bias)",
+        "structure": "if bearish read: buy 30-delta puts at 30 DTE to express downside with defined risk; if bullish read: buy a call vertical (long 30-delta call + short 15-delta call) to reduce the IV cost",
+        "example_position": "long 1x 30-delta put, 30 DTE, at the current chain's ask — max loss is the premium",
+        "max_risk": "the full premium if the pattern doesn't play out; IV crush post-event can hurt even a correctly-directional trade",
+        "typical_horizon": "days to weeks",
+        "rationale": "IV spikes usually mark real information flow; the directional read is about *which way*, not *whether*"
+      },
+      "vol_trader": {
+        "view": "reads a rapid IV spike vs realized vol as vol overpriced — a candidate to fade",
+        "structure": "sells a 30-DTE ATM iron condor (short 30-delta call + long 45-delta call + short 30-delta put + long 45-delta put) so the max loss is defined; delta-hedges as spot moves",
+        "example_position": "1x short iron condor, wings 10 strikes wide, delta-hedged nightly",
+        "max_risk": "the width of the wings minus premium collected; realized vol exceeding implied vol until the position exits",
+        "typical_horizon": "days to expiry",
+        "rationale": "IV mean-reverts across most regimes; selling into the spike captures the reversion if it holds"
+      }
+    },
+    "pc_ratio_shift": {
+      "market_maker": {
+        "view": "flow-reactive; the ratio shift tells the desk it has taken on directional inventory that needs hedging",
+        "structure": "rebalances the delta hedge continuously; widens the spread on the busy side (calls if flow is call-heavy) to slow further one-sided fills",
+        "example_position": "if flow is put-heavy → the desk's book is now delta-short from selling puts → buys the underlying to flatten delta",
+        "max_risk": "adverse spot move before the hedge is complete; a squeeze or crash that leaves the book on the wrong side of gamma",
+        "typical_horizon": "minutes",
+        "rationale": "the desk is not betting; it's discharging the risk it accumulated from filling the flow"
+      },
+      "directional_trader": {
+        "view": "reads a large P/C shift as informed positioning — often ahead of a catalyst that the crowd hasn't priced in yet",
+        "structure": "if put-heavy → considers a bearish structure like a put spread (long 30-delta put + short 15-delta put) to align with the flow at a defined cost; if call-heavy → the mirror trade with calls",
+        "example_position": "long 1x 30-delta put spread, 30 DTE, ~$3 debit, max profit ~$7 if the pattern extends",
+        "max_risk": "the debit paid if the flow was noise rather than signal; the pattern reverting quickly",
+        "typical_horizon": "days to weeks",
+        "rationale": "informed flow tends to precede catalysts; a defined-risk spread makes the pattern payable without leaving the desk fully exposed if wrong"
+      },
+      "vol_trader": {
+        "view": "the ratio itself is not a vol signal; the desk pairs it with the IV response — if IV rose alongside, likely genuine fear (short vol candidate); if IV stayed flat, likely mechanical flow (no vol edge)",
+        "structure": "if IV rose with the shift: short a strangle sized against the pattern; if IV stayed put: no vol trade — waits",
+        "example_position": "1x short 25-delta strangle, 30 DTE, delta-hedged; or no position if IV didn't confirm",
+        "max_risk": "an actual regime change that keeps IV elevated and eats the premium sold",
+        "typical_horizon": "days to expiry",
+        "rationale": "flow imbalance without vol confirmation is a directional signal, not a vol signal — the desk holds fire"
+      }
+    },
+    "vol_oi_divergence": {
+      "market_maker": {
+        "view": "high vol relative to OI means informed new positioning — the desk suspects it's on the wrong side of what's coming",
+        "structure": "widens spreads aggressively in the strikes seeing the divergence; may reduce inventory in the name entirely; refuses to make markets on very short-dated OTM strikes seeing the biggest divergence",
+        "example_position": "no position — the response is defensive, not directional",
+        "max_risk": "continued informed flow overwhelming the desk's ability to hedge before a catalyst prints",
+        "typical_horizon": "immediate",
+        "rationale": "when someone consistently knows more than you do, the right move is to stop trading with them"
+      },
+      "directional_trader": {
+        "view": "reads the divergence as a leading indicator — new positioning ahead of an event the crowd doesn't see yet — and positions in the direction of the flow with defined risk",
+        "structure": "buys options at the strikes seeing the divergence at the same DTE (following the informed flow); uses spreads to reduce the vega pop that often follows",
+        "example_position": "long 1x call vertical at the exact strikes seeing new-OI opening, DTE matched, ~$3 debit",
+        "max_risk": "the debit paid if the flow was hedging rather than positioning; a catalyst that resolves inside the spread",
+        "typical_horizon": "days",
+        "rationale": "vol/OI divergences historically resolve in the direction of the new positioning within a session or two; the trade is a small defined-risk bet on the crowd being right"
+      },
+      "vol_trader": {
+        "view": "reads the divergence as a signal that IV is about to rise — new positioning drives realized vol, which drags IV up",
+        "structure": "buys long gamma and long vega: a long straddle or long calendar spread at the ATM strike ahead of the vol rise",
+        "example_position": "long 1x 30-DTE ATM straddle at the current mid — max loss is the combined premium",
+        "max_risk": "the pattern resolving with no IV rise (informed flow that turns out to hedge, not to bet); IV crush post-event",
+        "typical_horizon": "days to weeks",
+        "rationale": "informed positioning tends to precede realized-vol expansion; long optionality captures both the up-move in IV and the eventual spot move"
+      }
+    }
+  }
+}
