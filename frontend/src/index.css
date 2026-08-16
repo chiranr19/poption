@@ -1,0 +1,58 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+html, body, #root { height: 100%; }
+
+body {
+  margin: 0;
+  background: #0a0908;
+  color: #f2eee2;
+  font-family: "IBM Plex Sans", system-ui, sans-serif;
+  font-weight: 300;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  /* subtle warm gradient wash — atmosphere, not obvious color */
+  background-image:
+    radial-gradient(1200px 600px at 15% -10%, rgba(201, 111, 52, 0.08), transparent 60%),
+    radial-gradient(900px 500px at 100% 100%, rgba(230, 163, 82, 0.04), transparent 60%);
+  background-attachment: fixed;
+}
+
+/* Grain overlay — barely-there film texture that keeps the darks alive. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 100;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/></svg>");
+  mix-blend-mode: overlay;
+}
+
+.tnum { font-variant-numeric: tabular-nums; letter-spacing: -0.01em; }
+
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: rgba(242, 238, 226, 0.10);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover { background: rgba(242, 238, 226, 0.18); }
+
+/* A tiny caret used in section headings — decorative. */
+.rule-caret::before {
+  content: "";
+  display: inline-block;
+  width: 6px; height: 6px;
+  background: #c96f34;
+  transform: rotate(45deg);
+  margin-right: 10px;
+  vertical-align: middle;
+  box-shadow: 0 0 8px rgba(201, 111, 52, 0.5);
+}

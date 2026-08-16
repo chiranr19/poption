@@ -1,0 +1,39 @@
+# ---- Python / backend ----
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# ---- Secrets (Claude API key lives here) ----
+.env
+.env.local
+*.env
+!.env.example
+
+# ---- Node / frontend ----
+node_modules/
+dist/
+.turbo/
+*.tsbuildinfo
+frontend/.env*.local
+npm-debug.log*
+yarn-error.log*
+
+# ---- Claude Code (personal/local settings; launch.json stays tracked) ----
+.claude/settings.local.json
+
+# ---- Editor / OS ----
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# ---- Local scratch / recordings ----
+*.mp4
+*.mov
+recordings/

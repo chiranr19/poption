@@ -1,0 +1,248 @@
+{
+  "meta": {
+    "version": 1,
+    "note": "Curated historical events with the option-flow signatures they left behind. Used as retrieval context for LLM explanations. Numbers are stylized summaries of well-documented events, not proprietary data."
+  },
+  "events": [
+    {
+      "id": "black-monday-1987",
+      "date": "1987-10-19",
+      "title": "Black Monday",
+      "tags": ["crash", "volatility_regime_change", "put_demand"],
+      "signature": {
+        "iv_move": "S&P index vol permanent regime shift; skew (OTM puts richer than OTM calls) becomes structural feature from this point on",
+        "pc_flow": "extreme put demand; index-put insurance mania in the aftermath",
+        "regime": "stressed"
+      },
+      "lesson": "The event that created the equity 'volatility smile' as we know it. Before 1987 the surface was roughly flat; after, OTM puts always trade richer than OTM calls at the same delta."
+    },
+    {
+      "id": "asian-fx-crisis-1997",
+      "date": "1997-10",
+      "title": "Asian Currency Crisis",
+      "tags": ["contagion", "correlation_spike", "cross_asset"],
+      "signature": {
+        "iv_move": "index IV +30 to 40 vol-points in a session",
+        "pc_flow": "put/call flow tilted heavily to puts on Asia ADRs and financials",
+        "regime": "stressed"
+      },
+      "lesson": "Cross-asset correlations spike in a crisis — anomalies that fire in one name often propagate to peers within minutes."
+    },
+    {
+      "id": "ltcm-1998",
+      "date": "1998-09",
+      "title": "LTCM Collapse",
+      "tags": ["hedge_fund_blowup", "correlation_spike", "credit"],
+      "signature": {
+        "iv_move": "vol regime shifted 20+ points across index and single names",
+        "pc_flow": "put demand persistent for weeks post-event",
+        "regime": "stressed"
+      },
+      "lesson": "'Uncorrelated' strategies correlate to 1.0 during liquidations. A single-name IV spike near a big fund's known holdings often has a systemic cause."
+    },
+    {
+      "id": "dotcom-peak-2000",
+      "date": "2000-03",
+      "title": "Dot-com Peak",
+      "tags": ["bubble_top", "call_frenzy", "iv_collapse"],
+      "signature": {
+        "iv_move": "tech-name IV very high going in, collapsed as the bubble deflated over 2000-2002",
+        "pc_flow": "extreme call skew — retail bought upside; put IV lagged",
+        "regime": "stressed"
+      },
+      "lesson": "Extreme call demand can precede tops. When call skew is richer than put skew for a full sector, ask why."
+    },
+    {
+      "id": "9-11-attacks-2001",
+      "date": "2001-09-11",
+      "title": "9/11 Market Halt",
+      "tags": ["exogenous_shock", "gap", "put_demand"],
+      "signature": {
+        "iv_move": "on-reopen index IV +25 points overnight",
+        "pc_flow": "put demand overwhelming for airlines, insurance, and index",
+        "regime": "stressed"
+      },
+      "lesson": "Exogenous shocks reopen with a gap and an IV surface that already re-priced in the void. Detector fires immediately at market open."
+    },
+    {
+      "id": "gfc-2008",
+      "date": "2008-09",
+      "title": "Global Financial Crisis / Lehman",
+      "tags": ["crash", "credit", "bank_failure", "correlation_spike"],
+      "signature": {
+        "iv_move": "VIX ran 20 to >80; single-name financial IV multiples higher",
+        "pc_flow": "sustained put demand for 6 months, put/call ratios pinned >1.5",
+        "regime": "stressed"
+      },
+      "lesson": "The archetypal put/call regime shift. Once put/call ratios establish a new elevated baseline for weeks, the detector should widen its z-score windows or it'll normalize the crisis."
+    },
+    {
+      "id": "flash-crash-2010",
+      "date": "2010-05-06",
+      "title": "Flash Crash",
+      "tags": ["liquidity_evaporation", "microstructure"],
+      "signature": {
+        "iv_move": "intraday IV +30 points, mostly reversed by close",
+        "pc_flow": "put volume/OI ratios blew out on the way down",
+        "regime": "stressed"
+      },
+      "lesson": "Microstructure events fire the detector but don't sustain — treat vol/OI spikes without persistent P/C follow-through as microstructure, not fundamentals."
+    },
+    {
+      "id": "eu-debt-2011",
+      "date": "2011-08",
+      "title": "US Downgrade / EU Debt",
+      "tags": ["sovereign", "credit"],
+      "signature": {
+        "iv_move": "VIX 20 to 48",
+        "pc_flow": "put demand persistent on European names",
+        "regime": "stressed"
+      },
+      "lesson": "Sovereign credit stress shows first in European bank IV before spreading to index."
+    },
+    {
+      "id": "swiss-franc-unpeg-2015",
+      "date": "2015-01-15",
+      "title": "SNB Removes Franc Peg",
+      "tags": ["central_bank_surprise", "fx", "gap"],
+      "signature": {
+        "iv_move": "CHF vols exploded; equity effects minor",
+        "pc_flow": "FX-hedge-related demand in banks with CHF exposure",
+        "regime": "stressed"
+      },
+      "lesson": "Central-bank surprises leave near-invisible spot moves in equities but visible put demand in banks with exposure — a case for cross-asset context."
+    },
+    {
+      "id": "brexit-2016",
+      "date": "2016-06-24",
+      "title": "Brexit Vote",
+      "tags": ["binary_event", "overnight_gap", "iv_crush_post"],
+      "signature": {
+        "iv_move": "GBP and FTSE IV peaked before vote, crushed after gap",
+        "pc_flow": "put demand pre-vote reversed to selling post-vote",
+        "regime": "stressed"
+      },
+      "lesson": "Binary-event IV crushes hard on resolution — a fire on the way in and a mirror-image fire on the way out."
+    },
+    {
+      "id": "volmageddon-2018",
+      "date": "2018-02-05",
+      "title": "Volmageddon (XIV Blow-up)",
+      "tags": ["short_vol_unwind", "vega_squeeze"],
+      "signature": {
+        "iv_move": "VIX 17 to 50 in a session; short-vol ETPs blew up",
+        "pc_flow": "call demand in VIX products, put demand in equity",
+        "regime": "stressed"
+      },
+      "lesson": "Crowded short-vol trades unwind non-linearly. IV spikes with a very specific microstructure signature (VIX complex first, equity second) point to derivatives-driven, not fundamental, events."
+    },
+    {
+      "id": "covid-crash-2020",
+      "date": "2020-03",
+      "title": "COVID Crash",
+      "tags": ["exogenous_shock", "crash", "iv_regime_shift", "put_demand"],
+      "signature": {
+        "iv_move": "VIX 14 to 82; skew steepened massively then normalized over weeks",
+        "pc_flow": "sustained put demand on index and travel/hospitality names",
+        "regime": "stressed"
+      },
+      "lesson": "The exogenous-shock playbook: IV surface pops, skew steepens, put/call ratio inverts. First-week signals are the tightest; second-week signals get discounted as the new baseline sets in."
+    },
+    {
+      "id": "gme-squeeze-2021",
+      "date": "2021-01",
+      "title": "GameStop Short Squeeze",
+      "tags": ["short_squeeze", "call_frenzy", "retail"],
+      "signature": {
+        "iv_move": "GME IV 100 to >800 vol-points across the whole surface",
+        "pc_flow": "P/C inverted — calls vastly outnumbered puts; OTM call flow dominated",
+        "regime": "stressed"
+      },
+      "lesson": "The archetypal call-frenzy signature: P/C ratio well below 1, short-dated OTM calls carrying most of the volume, IV surface flattening as demand crushes skew."
+    },
+    {
+      "id": "meme-stock-cluster-2021",
+      "date": "2021-01-Q1",
+      "title": "Meme-Stock Cluster (AMC, BB, NOK)",
+      "tags": ["short_squeeze", "call_frenzy", "retail", "cross_name_contagion"],
+      "signature": {
+        "iv_move": "similar pattern in AMC/BB/NOK; correlated call frenzy",
+        "pc_flow": "cross-name P/C inversions",
+        "regime": "stressed"
+      },
+      "lesson": "Retail-driven squeezes cluster — a single-name signal often has a peer group firing in parallel."
+    },
+    {
+      "id": "yield-shock-2022",
+      "date": "2022-Q2",
+      "title": "2022 Rate Shock",
+      "tags": ["rates", "growth_selloff", "iv_persistent_elevated"],
+      "signature": {
+        "iv_move": "VIX oscillated 25-35 for months; skew stayed persistently steep",
+        "pc_flow": "steady put demand on growth names",
+        "regime": "stressed"
+      },
+      "lesson": "Persistent regimes: when P/C stays elevated for weeks, the detector's window normalizes the new baseline. Look for *changes* in a stressed regime, not the level."
+    },
+    {
+      "id": "svb-collapse-2023",
+      "date": "2023-03-10",
+      "title": "SVB Collapse",
+      "tags": ["bank_failure", "regional_bank_contagion", "put_demand"],
+      "signature": {
+        "iv_move": "regional-bank IV +30 points; SVB itself halted; index IV modest",
+        "pc_flow": "put demand ripped across sector — KRE puts dominated",
+        "regime": "stressed"
+      },
+      "lesson": "Sector-specific stress: fires in one name propagate to peers within an hour. Cross-asset correlation view is decisive."
+    },
+    {
+      "id": "credit-suisse-2023",
+      "date": "2023-03-15",
+      "title": "Credit Suisse Bailout",
+      "tags": ["bank_failure", "credit", "regulatory"],
+      "signature": {
+        "iv_move": "CS IV extreme; systemic-financial IV modestly higher",
+        "pc_flow": "put demand persistent on European banks",
+        "regime": "stressed"
+      },
+      "lesson": "A troubled name's IV can pop without materially dragging the index — single-name stress is not always systemic."
+    },
+    {
+      "id": "yen-carry-unwind-2024",
+      "date": "2024-08-05",
+      "title": "Yen Carry Unwind",
+      "tags": ["carry_unwind", "fx", "cross_asset"],
+      "signature": {
+        "iv_move": "VIX briefly touched 65 intraday; reversed same session",
+        "pc_flow": "concentrated put demand on tech, crash pattern on Nikkei",
+        "regime": "stressed"
+      },
+      "lesson": "Cross-asset carry unwinds can produce single-session IV spikes with very fast reversion. Confidence should discount hard when the underlying signal reverts within hours."
+    },
+    {
+      "id": "generic-earnings-iv-crush",
+      "date": "n/a",
+      "title": "Earnings IV Crush Pattern",
+      "tags": ["scheduled_event", "earnings", "iv_crush"],
+      "signature": {
+        "iv_move": "IV builds pre-earnings, crushes ~30-50% overnight after release",
+        "pc_flow": "balanced pre; directional post based on beat/miss",
+        "regime": "normal"
+      },
+      "lesson": "Scheduled events are not anomalies — detector should suppress fires on names within 2 sessions of a known earnings date. (Not implemented in this synthetic demo but the pattern is here for reference.)"
+    },
+    {
+      "id": "generic-fomc-day",
+      "date": "n/a",
+      "title": "FOMC Day IV Pattern",
+      "tags": ["scheduled_event", "fed", "macro"],
+      "signature": {
+        "iv_move": "index IV compresses into 2pm ET, then re-prices in one session",
+        "pc_flow": "put/call ratio can swing sharply based on Powell's tone",
+        "regime": "normal"
+      },
+      "lesson": "Scheduled macro events fire the detector predictably. In production this suggests a calendar-aware suppression layer."
+    }
+  ]
+}
