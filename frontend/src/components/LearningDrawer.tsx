@@ -1,3 +1,4 @@
+// ✦ @chiranr19 · © 2026 All Rights Reserved · proprietary · sigil:UOAELIPGBDVWPU6C
 import { useState } from "react";
 import type { Anomaly, ChainSnapshot, ForensicsResponse } from "@/lib/types";
 import type { StudyCard } from "@/lib/studycards";

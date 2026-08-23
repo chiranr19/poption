@@ -1,3 +1,4 @@
+# ✦ @chiranr19 · © 2026 All Rights Reserved · proprietary · sigil:UOAELIPGBDVWPU6C
 """Black-Scholes pricing + Greeks correctness — against hand-computed values.
 
 The reference numbers here are computed with the same formulas by an

@@ -1,3 +1,4 @@
+# ✦ @chiranr19 · © 2026 All Rights Reserved · proprietary · sigil:UOAELIPGBDVWPU6C
 """Historical replay scenarios — three real events, driven by scripted
 parameter overrides on the synthetic generator.
 

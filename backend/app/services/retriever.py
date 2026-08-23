@@ -1,3 +1,4 @@
+# ✦ @chiranr19 · © 2026 All Rights Reserved · proprietary · sigil:UOAELIPGBDVWPU6C
 """Event-corpus retriever.
 
 The LLM's forensic explanations are grounded in two things: (1) the anomaly's

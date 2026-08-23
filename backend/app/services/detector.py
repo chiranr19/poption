@@ -1,3 +1,4 @@
+# ✦ @chiranr19 · © 2026 All Rights Reserved · proprietary · sigil:UOAELIPGBDVWPU6C
 """Anomaly detector: rolling z-score signals with named-factor confidence.
 
 Three detectors, each measuring a different mechanism the flow can spike on:

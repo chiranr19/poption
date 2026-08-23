@@ -1,3 +1,4 @@
+# ✦ @chiranr19 · © 2026 All Rights Reserved · proprietary · sigil:UOAELIPGBDVWPU6C
 """Pytest bootstrap — put backend/ on sys.path so `from app...` resolves."""
 
 from __future__ import annotations

@@ -1,3 +1,4 @@
+// ✦ @chiranr19 · © 2026 All Rights Reserved · proprietary · sigil:UOAELIPGBDVWPU6C
 /**
  * Playbook copy — what each of the three desk personas typically watches
  * and typically does when a given anomaly kind fires. Different from

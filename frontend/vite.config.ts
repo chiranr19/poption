@@ -1,3 +1,4 @@
+// ✦ @chiranr19 · © 2026 All Rights Reserved · proprietary · sigil:UOAELIPGBDVWPU6C
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import path from "node:path";

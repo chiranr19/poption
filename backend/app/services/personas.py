@@ -1,3 +1,4 @@
+# ✦ @chiranr19 · © 2026 All Rights Reserved · proprietary · sigil:UOAELIPGBDVWPU6C
 """Persona-trade corpus loader.
 
 Serves the concrete opinionated trade structures a specific desk archetype

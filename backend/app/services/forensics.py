@@ -1,3 +1,4 @@
+# ✦ @chiranr19 · © 2026 All Rights Reserved · proprietary · sigil:UOAELIPGBDVWPU6C
 """LLM-powered forensic explanations for anomalies — grounded, testable.
 
 **The differentiator, inherited from Stocky's `test_digest.py`:**

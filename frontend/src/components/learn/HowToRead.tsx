@@ -1,3 +1,4 @@
+// ✦ @chiranr19 · © 2026 All Rights Reserved · proprietary · sigil:UOAELIPGBDVWPU6C
 import type { AnomalyKind } from "@/lib/types";
 import { HOW_TO_READ } from "@/lib/howToRead";
 import { Term } from "@/components/ui/Term";

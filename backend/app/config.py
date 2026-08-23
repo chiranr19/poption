@@ -1,3 +1,4 @@
+# ✦ @chiranr19 · © 2026 All Rights Reserved · proprietary · sigil:UOAELIPGBDVWPU6C
 """Application settings + tuning constants (documented so the UI can explain them)."""
 
 from __future__ import annotations

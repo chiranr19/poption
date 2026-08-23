@@ -1,3 +1,4 @@
+# ✦ @chiranr19 · © 2026 All Rights Reserved · proprietary · sigil:UOAELIPGBDVWPU6C
 """Simulation clock + fan-out broker.
 
 One :class:`SimulationClock` drives the :class:`MarketSimulator` forward at a

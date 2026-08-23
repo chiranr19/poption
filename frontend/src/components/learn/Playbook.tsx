@@ -1,3 +1,4 @@
+// ✦ @chiranr19 · © 2026 All Rights Reserved · proprietary · sigil:UOAELIPGBDVWPU6C
 import type { AnomalyKind } from "@/lib/types";
 import { PLAYBOOK, type PersonaKey } from "@/lib/playbook";
 import { Term } from "@/components/ui/Term";

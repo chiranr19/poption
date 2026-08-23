@@ -1,3 +1,4 @@
+// ✦ @chiranr19 · © 2026 All Rights Reserved · proprietary · sigil:UOAELIPGBDVWPU6C
 /**
  * The learning-layer glossary. Every jargon word on the dashboard resolves
  * to an entry here via the <Term k="..."> component. Each entry follows the

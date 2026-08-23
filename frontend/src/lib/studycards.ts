@@ -1,3 +1,4 @@
+// ✦ @chiranr19 · © 2026 All Rights Reserved · proprietary · sigil:UOAELIPGBDVWPU6C
 /**
  * Study Cards — the tag-a-persona-trade-and-watch-it-play-out layer.
  *

@@ -1,3 +1,4 @@
+// ✦ @chiranr19 · © 2026 All Rights Reserved · proprietary · sigil:UOAELIPGBDVWPU6C
 // Mirrors backend/app/models.py — keep in sync when changing shapes.
 
 export type Regime = "calm" | "normal" | "stressed";

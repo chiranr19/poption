@@ -1,3 +1,4 @@
+# ✦ @chiranr19 · © 2026 All Rights Reserved · proprietary · sigil:UOAELIPGBDVWPU6C
 """Pydantic models — the API's contract with the frontend.
 
 These mirror the TypeScript types in ``frontend/src/lib/types.ts`` — keep the

@@ -1,3 +1,4 @@
+# ✦ @chiranr19 · © 2026 All Rights Reserved · proprietary · sigil:UOAELIPGBDVWPU6C
 """Black-Scholes option pricing + analytical Greeks.
 
 Pure functions over floats/arrays — no state, no I/O — so the tests can

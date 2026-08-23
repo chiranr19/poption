@@ -1,3 +1,4 @@
+# ✦ @chiranr19 · © 2026 All Rights Reserved · proprietary · sigil:UOAELIPGBDVWPU6C
 """Grounded-forensics tests — the anti-hallucination guarantee.
 
 This is the differentiator inherited from Stocky's `test_digest.py`. If any of

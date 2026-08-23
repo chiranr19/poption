@@ -1,3 +1,4 @@
+// ✦ @chiranr19 · © 2026 All Rights Reserved · proprietary · sigil:UOAELIPGBDVWPU6C
 import { useEffect, useState } from "react";
 import type { Anomaly, ChainSnapshot } from "@/lib/types";
 import { Term } from "@/components/ui/Term";

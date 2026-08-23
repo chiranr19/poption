@@ -1,3 +1,4 @@
+# ✦ @chiranr19 · © 2026 All Rights Reserved · proprietary · sigil:UOAELIPGBDVWPU6C
 """End-to-end streaming pipeline tests using FastAPI's TestClient."""
 
 from __future__ import annotations

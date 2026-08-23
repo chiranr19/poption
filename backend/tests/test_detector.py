@@ -1,3 +1,4 @@
+# ✦ @chiranr19 · © 2026 All Rights Reserved · proprietary · sigil:UOAELIPGBDVWPU6C
 """Detector correctness — fires on planted anomalies, silent on calm data."""
 
 from __future__ import annotations

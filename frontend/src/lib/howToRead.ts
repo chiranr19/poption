@@ -1,3 +1,4 @@
+// ✦ @chiranr19 · © 2026 All Rights Reserved · proprietary · sigil:UOAELIPGBDVWPU6C
 /**
  * Deterministic "how to read this" copy per anomaly kind — sits *above* the
  * LLM forensics narrative so beginners have four concrete labelled sections

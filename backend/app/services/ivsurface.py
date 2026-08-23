@@ -1,3 +1,4 @@
+# ✦ @chiranr19 · © 2026 All Rights Reserved · proprietary · sigil:UOAELIPGBDVWPU6C
 """Synthetic implied-volatility surface with smile, skew, and term structure.
 
 Real IV surfaces have shape: OTM puts trade richer than ATM (the "skew" — the

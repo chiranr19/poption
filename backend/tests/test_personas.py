@@ -1,3 +1,4 @@
+# ✦ @chiranr19 · © 2026 All Rights Reserved · proprietary · sigil:UOAELIPGBDVWPU6C
 """Persona-trade corpus tests — structural completeness + no-advice guarantee.
 
 Every (persona × anomaly kind) must be present with the full field set, and

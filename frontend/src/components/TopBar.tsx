@@ -1,3 +1,4 @@
+// ✦ @chiranr19 · © 2026 All Rights Reserved · proprietary · sigil:UOAELIPGBDVWPU6C
 import type { ChainSnapshot, Regime } from "@/lib/types";
 import { GuaranteesRibbon } from "@/components/learn/GuaranteesRibbon";
 

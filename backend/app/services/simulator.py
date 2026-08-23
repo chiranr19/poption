@@ -1,3 +1,4 @@
+# ✦ @chiranr19 · © 2026 All Rights Reserved · proprietary · sigil:UOAELIPGBDVWPU6C
 """Regime-switching synthetic options-market generator.
 
 A deterministic, seedable driver of spot + IV surface parameters that walks
