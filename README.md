@@ -10,10 +10,12 @@
 ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white)
 ![Claude](https://img.shields.io/badge/Claude-Sonnet%205-C96F34)
 ![Tests](https://img.shields.io/badge/tests-65%20passing-7c9070)
-![License](https://img.shields.io/badge/license-MIT-lightgrey)
+![License](https://img.shields.io/badge/license-proprietary-F6465D)
 
 **Streaming synthetic options chain · rolling-z anomaly engine · factor-scored
 confidence · Claude-narrated forensics · CI-enforced grounding**
+
+![Poption — live options-flow forensics dashboard mid-COVID-replay: the spot line has crashed, the implied-vol surface is glowing hot, and the market regime reads "Stressed".](docs/dashboard.png)
 
 Poption watches a live options chain, fires when implied vol, put/call flow,
 or volume-to-open-interest steps outside its rolling window, and asks Claude
